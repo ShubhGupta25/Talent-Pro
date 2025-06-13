@@ -1,0 +1,307 @@
+:root {
+  --primary: #6c47ff;
+  --secondary: #00bfae;
+  --background: #f6f8fb;
+  --card: rgba(255, 255, 255, 0.85);
+  --border: #e3e8f0;
+  --text: #232946;
+  --error: #e53935;
+  --button: linear-gradient(90deg, #6c47ff 0%, #00bfae 100%);
+  --button-text: #fff;
+  --gradient: linear-gradient(120deg, #e3e8f0 0%, #f6f8fb 100%);
+  --shadow: 0 8px 32px 0 #6c47ff22;
+  --footer: #b0b8c1;
+  --cta-gradient: linear-gradient(90deg, #00bfae 0%, #6c47ff 100%);
+  --glass-blur: blur(18px);
+  --card-radius: 24px;
+  --transition: 0.35s cubic-bezier(0.4, 2, 0.6, 1);
+}
+
+body[data-theme="dark"] {
+  --primary: #ff9800;
+  --secondary: #00bfae;
+  --background: #181a20;
+  --card: rgba(35, 36, 43, 0.85);
+  --border: #33364a;
+  --text: #f5f6fa;
+  --error: #ff5252;
+  --button: linear-gradient(90deg, #ff9800 0%, #00bfae 100%);
+  --button-text: #23242b;
+  --gradient: linear-gradient(120deg, #23242b 0%, #181a20 100%);
+  --shadow: 0 8px 32px 0 #ff980022;
+  --footer: #aaa;
+  --cta-gradient: linear-gradient(90deg, #00bfae 0%, #ff9800 100%);
+  --glass-blur: blur(18px);
+  --card-radius: 24px;
+  --transition: 0.35s cubic-bezier(0.4, 2, 0.6, 1);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background);
+  color: var(--text);
+  transition: background var(--transition), color var(--transition);
+  overflow-y: overlay; /* Prevents layout shift when scrollbar appears */
+  overflow-x: hidden;
+}
+
+html {
+  overflow-y: overlay; /* Prevents layout shift when scrollbar appears */
+  overflow-x: hidden;
+}
+
+/* Hide scrollbars globally for a cleaner look */
+body,
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s var(--transition) both;
+  /* Hide scrollbar during animation */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.fade-in::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.glass-card {
+  background: var(--card);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--border);
+  transition: background var(--transition), box-shadow var(--transition);
+  padding: 36px 24px;
+}
+
+.cta-btn {
+  background: var(--button);
+  color: var(--button-text);
+  border: none;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px 0 var(--primary) 22;
+  letter-spacing: 1px;
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform 0.2s;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 100px;
+}
+
+.cta-btn:hover,
+.cta-btn:focus {
+  filter: brightness(1.08);
+  box-shadow: 0 8px 32px 0 var(--secondary) 33;
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Modern pop-in animation for chat messages */
+.message-in {
+  animation: messageIn 0.55s cubic-bezier(0.33, 1, 0.68, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes messageIn {
+  0% {
+    opacity: 0;
+    transform: translateY(32px) scale(0.96);
+    filter: blur(2px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Modern glassy navbar for both themes */
+.navbar-glass {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--navbar-bg, rgba(255, 255, 255, 0.18));
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  color: var(--navbar-text, #232946);
+  box-shadow: 0 2px 16px 0 var(--primary) 11;
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition);
+}
+
+body[data-theme="dark"] .navbar-glass {
+  --navbar-bg: rgba(35, 36, 43, 0.72);
+  --navbar-text: #f5f6fa;
+}
+body[data-theme="light"] .navbar-glass {
+  --navbar-bg: rgba(255, 255, 255, 0.72);
+  --navbar-text: #232946;
+}
+
+.navbar-logo {
+  margin-left: 32px;
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--navbar-text);
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  transition: color var(--transition);
+}
+
+.navbar-actions {
+  margin-right: 32px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.navbar-btn,
+.navbar-link {
+  background: transparent;
+  color: var(--navbar-text);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 var(--primary) 11;
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform 0.18s;
+  text-decoration: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-btn:hover,
+.navbar-link:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px 0 var(--secondary) 22;
+}
+
+/* Responsive design for mobile and tablet */
+@media (max-width: 900px) {
+  .navbar-logo {
+    margin-left: 16px;
+    font-size: 20px;
+  }
+  .navbar-actions {
+    margin-right: 16px;
+    gap: 10px;
+  }
+  .glass-card {
+    padding: 24px 12px;
+  }
+  .cta-btn {
+    min-width: 80px;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar-glass {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+  .navbar-logo {
+    font-size: 18px;
+    margin-left: 8px;
+  }
+  .navbar-actions {
+    margin-right: 8px;
+    gap: 6px;
+  }
+  .glass-card {
+    padding: 16px 4vw;
+    border-radius: 16px;
+  }
+  .cta-btn {
+    min-width: 60px;
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 8px;
+  }
+  body,
+  html {
+    font-size: 15px;
+  }
+  /* Chat page specific tweaks */
+  .chat-page-main {
+    max-width: 100vw !important;
+    padding: 0 !important;
+  }
+  .chat-page-messages {
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-logo {
+    font-size: 15px;
+  }
+  .glass-card {
+    padding: 10px 2vw;
+    border-radius: 10px;
+  }
+  .cta-btn {
+    font-size: 12px;
+    padding: 6px 6px;
+    min-width: 40px;
+  }
+}
