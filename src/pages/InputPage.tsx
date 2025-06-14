@@ -21,8 +21,12 @@ const InputPage: React.FC = () => {
       formData.append("githubUrl", githubUrl);
       if (file) formData.append("file", file);
       console.log("InputPage payload:", { githubUrl, file });
+      const jwtToken = localStorage.getItem("jwtToken");
       await axios.post("http://localhost:8080/user/details", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          ...(jwtToken ? { Authorization: `Bearer ${jwtToken}` } : {}),
+        },
       });
       setSubmitted(true);
     } catch (err: any) {

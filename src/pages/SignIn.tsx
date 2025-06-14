@@ -6,8 +6,8 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // localStorage.setItem("jwtToken", "xyz123");
-  // localStorage.setItem("userType", "employee"); 
+  localStorage.setItem("jwtToken", "xyz123");
+  localStorage.setItem("userType", "recruiter"); 
   // Temporary for testing, remove in production
   // // Remove the above line in production, it's just for testing purposes
   // // Ensure you have a valid JWT token in localStorage for testing

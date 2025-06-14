@@ -36,7 +36,13 @@ const Navbar: React.FC = () => {
     try {
       if (email) {
         console.log("Logout payload:", { email });
-        await axios.post("/user/logout", { email });
+        await axios.post(
+          "/user/logout",
+          { email },
+          jwtToken
+            ? { headers: { Authorization: `Bearer ${jwtToken}` } }
+            : undefined
+        );
       }
     } catch (err) {
       // Optionally handle error (e.g., show notification)

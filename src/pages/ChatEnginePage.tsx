@@ -33,9 +33,13 @@ const ChatEnginePage: React.FC = () => {
     try {
       const payload = { message: input };
       console.log("ChatEngine payload:", payload);
+      const jwtToken = localStorage.getItem("jwtToken");
       const res = await axios.post(
         "http://localhost:8080/chat-engine/query",
-        payload
+        payload,
+        jwtToken
+          ? { headers: { Authorization: `Bearer ${jwtToken}` } }
+          : undefined
       );
       setMessages((prev) => [
         ...prev,
